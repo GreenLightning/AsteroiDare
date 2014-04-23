@@ -19,6 +19,18 @@ class Spaceship extends FlxSprite {
 		if (FlxG.keys.justReleased.SPACE) {
 			animation.play("float");
 		}
+		if (FlxG.keys.pressed.SPACE) {
+			velocity.y -= 100 * FlxG.elapsed;
+		}
+		limitVelocity(400);
+	}
+
+	private function limitVelocity(max:Float):Void {
+		var lengthSquared = velocity.x * velocity.x + velocity.y * velocity.y;
+		if (lengthSquared > max * max) {
+			velocity.x = velocity.x * max * max / lengthSquared;
+			velocity.y = velocity.y * max * max / lengthSquared;
+		}
 	}
 
 }
