@@ -8,7 +8,7 @@ class Spaceship extends FlxSprite {
 		super();
 		loadGraphic("graphics/spaceship.png", true, false, 64, 64);
 		animation.add("float", [0]);
-		animation.add("power", [1, 2, 1, 3], 20, true);
+		animation.add("power", [1, 2, 1, 3], 25, true);
 		animation.play("float");
 	}
 
