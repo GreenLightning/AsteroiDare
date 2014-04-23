@@ -9,6 +9,7 @@ class PlayState extends FlxState {
 	
 	override public function create():Void {
 		super.create();
+		add(new Starfield());
 		var ship = new Spaceship();
 		ship.x = FlxG.width / 2;
 		ship.y = FlxG.height / 2;
