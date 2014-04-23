@@ -17,7 +17,8 @@
 	<!--------------------------------PATHS SETTINGS-------------------------------->
 	
 	<classpath name="source" />
-	<assets path="assets" />
+	<assets path="assets/graphics" rename="graphics" />
+	<assets path="assets/sounds" rename="sounds" />
 	
 	<!--------------------------------LIBRARIES------------------------------------->
 	
