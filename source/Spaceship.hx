@@ -2,6 +2,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
 import flixel.system.FlxSound;
+import flixel.util.FlxRandom;
 
 class Spaceship extends FlxSprite {
 
@@ -19,6 +20,8 @@ class Spaceship extends FlxSprite {
 		animation.play("float");
 		x = FlxG.width / 2;
 		y = FlxG.height / 2;
+		velocity.x = FlxRandom.floatRanged(-50, 50);
+		velocity.y = FlxRandom.floatRanged(-50, 50);
 	}
 
 	override public function update():Void {
