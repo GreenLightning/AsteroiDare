@@ -4,12 +4,18 @@ import flixel.input.keyboard.FlxKey;
 
 class Spaceship extends FlxSprite {
 
-	public function new() {
+	private var parent:PlayState;
+	private var coolDown:Float = 0;
+
+	public function new(parent:PlayState) {
 		super();
+		this.parent = parent;
 		loadGraphic("graphics/spaceship.png", true, false, 64, 64);
 		animation.add("float", [0]);
 		animation.add("power", [1, 2, 1, 3], 25, true);
 		animation.play("float");
+		x = FlxG.width / 2;
+		y = FlxG.height / 2;
 	}
 
 	override public function update():Void {
@@ -22,12 +28,13 @@ class Spaceship extends FlxSprite {
 	private function move():Void {
 		var left = ["LEFT", "A"];
 		var right = ["RIGHT", "D"];
-		var power = ["UP", "W", "SPACE"];
+		var power = ["DOWN", "S"];
+		var fire = ["UP", "W", "SPACE"];
 		if (FlxG.keys.anyPressed(left)) {
-			angle -= 360 / 2 * FlxG.elapsed;
+			angle -= 270 * FlxG.elapsed;
 		}
 		if (FlxG.keys.anyPressed(right)) {
-			angle += 360 / 2 * FlxG.elapsed;
+			angle += 270 * FlxG.elapsed;
 		}
 		angle = (angle + 360) % 360;
 		if (FlxG.keys.anyPressed(power)) {
@@ -41,6 +48,26 @@ class Spaceship extends FlxSprite {
 				animation.play("float");
 			}
 		}
+		coolDown -= FlxG.elapsed;
+		if (FlxG.keys.anyPressed(fire)) {
+			checkFireBullet();
+		}
+	}
+
+	private function checkFireBullet():Void {
+		if(coolDown <= 0) {
+			coolDown = 0.2;
+			fireBullet();
+		}
+	}
+
+	private function fireBullet():Void {
+		var bullet = new Bullet(parent.bullets);
+		bullet.x = x + (width - bullet.width) / 2 + Math.sin(Math.PI / 180 * angle) * 16;
+		bullet.y = y + (height - bullet.height) / 2 - Math.cos(Math.PI / 180 * angle) * 16;
+		bullet.velocity.x =  Math.sin(Math.PI / 180 * angle) * 300;
+		bullet.velocity.y = -Math.cos(Math.PI / 180 * angle) * 300;
+		parent.bullets.add(bullet);
 	}
 
 	private function limitVelocity(max:Float):Void {

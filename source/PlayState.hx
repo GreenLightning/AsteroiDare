@@ -1,20 +1,30 @@
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 
 class PlayState extends FlxState {
+
+	public var asteroids:Asteroids;
+	public var bullets:Bullets;
+	public var player:Spaceship;
 	
 	override public function create():Void {
 		super.create();
+
 		add(new Starfield());
-		add(new Asteroids());
-		var ship = new Spaceship();
-		ship.x = FlxG.width / 2;
-		ship.y = FlxG.height / 2;
-		add(ship);
+
+		asteroids = new Asteroids(this);
+		add(asteroids);
+
+		bullets = new Bullets(this);
+		add(bullets);
+
+		player = new Spaceship(this);
+		add(player);
 	}
 	
 	override public function destroy():Void {
