@@ -1,15 +1,18 @@
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
+import flixel.system.FlxSound;
 
 class Spaceship extends FlxSprite {
 
 	private var parent:PlayState;
+	private var hitSound:FlxSound;
 	private var coolDown:Float = 0;
 
 	public function new(parent:PlayState) {
 		super();
 		this.parent = parent;
+		hitSound = FlxG.sound.load("sounds/hit.wav");
 		loadGraphic("graphics/spaceship.png", true, false, 64, 64);
 		animation.add("float", [0]);
 		animation.add("power", [1, 2, 1, 3], 25, true);
@@ -91,6 +94,10 @@ class Spaceship extends FlxSprite {
 		if (y + height / 2 > FlxG.height) {
 			y -= FlxG.height;
 		}
+	}
+
+	public function hit():Void {
+		hitSound.play(true);
 	}
 
 }

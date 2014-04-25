@@ -30,6 +30,7 @@ class Asteroids extends FlxGroup {
 	}
 
 	private function onOverlap(player:Spaceship, asteroid:Asteroid):Void {
+		player.hit();
 		asteroid.kill();
 		remove(asteroid, true);
 	}

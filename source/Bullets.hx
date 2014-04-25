@@ -3,14 +3,17 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.util.FlxRandom;
 import flixel.util.FlxTimer;
+import flixel.system.FlxSound;
 
 class Bullets extends FlxGroup {
 
 	private var parent:PlayState;
+	private var explosion:FlxSound;
 
 	public function new(parent:PlayState) {
 		super();
 		this.parent = parent;
+		explosion = FlxG.sound.load("sounds/explosion.wav");
 	}
 
 	override public function update():Void {
@@ -23,6 +26,7 @@ class Bullets extends FlxGroup {
 	}
 
 	private function onOverlap(bullet:Bullet, asteroid:Asteroid):Void {
+		explosion.play(true);
 		bullet.kill();
 		this.remove(bullet, true);
 		asteroid.kill();
