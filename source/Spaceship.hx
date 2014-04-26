@@ -14,7 +14,7 @@ class Spaceship extends FlxSprite {
 		super();
 		this.parent = parent;
 		hitSound = FlxG.sound.load("sounds/hit.wav");
-		loadGraphic("graphics/spaceship.png", true, false, 64, 64);
+		loadGraphic("graphics/spaceship.png", true, 64, 64);
 		animation.add("float", [0]);
 		animation.add("power", [1, 2, 1, 3], 25, true);
 		animation.play("float");

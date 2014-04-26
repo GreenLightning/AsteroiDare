@@ -11,13 +11,13 @@ class Asteroids extends FlxGroup {
 	public function new(parent:PlayState) {
 		super();
 		this.parent = parent;
-		FlxTimer.start(1, spawn);
+		new FlxTimer(1, spawn);
 	}
 
 	private function spawn(timer:FlxTimer):Void {
 		var asteroid = new Asteroid(this);
 		add(asteroid);
-		FlxTimer.start(FlxRandom.floatRanged(1, 5), spawn);
+		new FlxTimer(FlxRandom.floatRanged(1, 5), spawn);
 	}
 
 	override public function update():Void {
