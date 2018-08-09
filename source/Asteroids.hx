@@ -1,7 +1,7 @@
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
-import flixel.util.FlxRandom;
+import flixel.math.FlxRandom;
 import flixel.util.FlxTimer;
 
 class Asteroids extends FlxGroup {
@@ -11,17 +11,17 @@ class Asteroids extends FlxGroup {
 	public function new(parent:PlayState) {
 		super();
 		this.parent = parent;
-		new FlxTimer(1, spawn);
+		new FlxTimer().start(1, spawn);
 	}
 
 	private function spawn(timer:FlxTimer):Void {
 		var asteroid = new Asteroid(this);
 		add(asteroid);
-		new FlxTimer(FlxRandom.floatRanged(1, 5), spawn);
+		new FlxTimer().start(FlxG.random.float(1, 5), spawn);
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 		FlxG.overlap(parent.player, this, onOverlap, testOverlap);
 	}
 

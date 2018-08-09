@@ -1,7 +1,7 @@
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
-import flixel.util.FlxRandom;
+import flixel.math.FlxRandom;
 import flixel.util.FlxTimer;
 import flixel.system.FlxSound;
 
@@ -16,8 +16,8 @@ class Bullets extends FlxGroup {
 		explosion = FlxG.sound.load("sounds/explosion.wav");
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 		FlxG.overlap(this, parent.asteroids, onOverlap, testOverlap);
 	}
 

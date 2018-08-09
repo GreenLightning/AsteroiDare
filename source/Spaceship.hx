@@ -2,7 +2,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.input.keyboard.FlxKey;
 import flixel.system.FlxSound;
-import flixel.util.FlxRandom;
+import flixel.math.FlxRandom;
 
 class Spaceship extends FlxSprite {
 
@@ -20,22 +20,22 @@ class Spaceship extends FlxSprite {
 		animation.play("float");
 		x = FlxG.width / 2;
 		y = FlxG.height / 2;
-		velocity.x = FlxRandom.floatRanged(-50, 50);
-		velocity.y = FlxRandom.floatRanged(-50, 50);
+		velocity.x = FlxG.random.float(-50, 50);
+		velocity.y = FlxG.random.float(-50, 50);
 	}
 
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 		move();
 		limitVelocity(400);
 		stayInBounds();
 	}
 
 	private function move():Void {
-		var left = ["LEFT", "A"];
-		var right = ["RIGHT", "D"];
-		var power = ["DOWN", "S"];
-		var fire = ["UP", "W", "SPACE"];
+		var left = [LEFT, A];
+		var right = [RIGHT, D];
+		var power = [DOWN, S];
+		var fire = [UP, W, SPACE];
 		if (FlxG.keys.anyPressed(left)) {
 			angle -= 270 * FlxG.elapsed;
 		}

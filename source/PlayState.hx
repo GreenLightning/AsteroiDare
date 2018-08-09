@@ -4,7 +4,7 @@ import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
-import flixel.util.FlxMath;
+import flixel.math.FlxMath;
 
 class PlayState extends FlxState {
 
@@ -31,8 +31,8 @@ class PlayState extends FlxState {
 		super.destroy();
 	}
 	
-	override public function update():Void {
-		super.update();
+	override public function update(elapsed:Float):Void {
+		super.update(elapsed);
 	}
 	
 }
